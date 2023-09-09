@@ -55,7 +55,7 @@
 {/block}
 
 {block name='header_top'}
-  <div class="header-top">
+  <div class="header-top custom-header-app">
     <div class="container">
        <div class="row">
         <div class="col-md-2 hidden-sm-down" id="_desktop_logo">
