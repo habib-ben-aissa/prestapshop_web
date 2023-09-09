@@ -34,7 +34,7 @@
   </div>
   <div class="media-body">
     <span class="product-name">
-        <a href="{$product.url}" target="_blank" rel="noopener noreferrer nofollow">{$product.name}</a>
+        <a href="{$product.url}" target="_blank" rel="noopener noreferrer nofollow">{$product.name} ({$product.category_name})</a>
     </span>
     <span class="product-quantity">x{$product.quantity}</span>
     <span class="product-price float-xs-right">{$product.price}</span>
