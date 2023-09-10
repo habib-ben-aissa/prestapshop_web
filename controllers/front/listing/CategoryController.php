@@ -122,10 +122,17 @@ class CategoryControllerCore extends ProductListingFrontController
         if (!empty($filteredCategory['object'])) {
             $categoryVar = $filteredCategory['object'];
         }
+        $counterProduct = [];
+        foreach ($this->getTemplateVarSubCategories() as $cat)
+        {
+            $ProductsCount = (int)Db::getInstance()->getValue('SELECT COUNT(cp.id_category) FROM '._DB_PREFIX_.'category_product cp, '._DB_PREFIX_.'product pr WHERE cp.id_category = '.$cat["id_category"].' AND cp.id_product = pr.id_product AND pr.active = 1' );
 
+            $counterProduct[$cat["id_category"]] = $ProductsCount;
+        }
         $this->context->smarty->assign([
             'category' => $categoryVar,
             'subcategories' => $this->getTemplateVarSubCategories(),
+            'counterProductCat'=> $counterProduct
         ]);
     }
 
