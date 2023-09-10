@@ -34,60 +34,45 @@
 
       {*      /////*******slider*}
       {if $subcategories}
-      <div id="slider-container" class="slider">
-          {foreach from=$subcategories item=subcategory}
+          <div id="slider-container" class="slider">
+              {foreach from=$subcategories item=subcategory}
+                  <div class="slide">
+                      {if !empty($subcategory.image.large.url)}
+                          <img class="replace-2x" src="{$subcategory.image.large.url}"
+                               alt="{$subcategory.name|escape:'html':'UTF-8'}" loading="lazy" width="141" height="180"/>
+                      {/if}
+                      <h5><a class="subcategory-name"
+                             href="{$link->getCategoryLink($subcategory.id_category, $subcategory.link_rewrite)|escape:'html':'UTF-8'}">{$subcategory.name|truncate:25:'...'|escape:'html':'UTF-8'}
+                              ({$counterProductCat[$subcategory.id_category]}) </a></h5>
 
-
-              <div class="slide">
-                  {if !empty($subcategory.image.large.url)}
-                      <img class="replace-2x" src="{$subcategory.image.large.url}" alt="{$subcategory.name|escape:'html':'UTF-8'}" loading="lazy" width="141" height="180"/>
-                  {/if}
-                  <h5><a class="subcategory-name" href="{$link->getCategoryLink($subcategory.id_category, $subcategory.link_rewrite)|escape:'html':'UTF-8'}">{$subcategory.name|truncate:25:'...'|escape:'html':'UTF-8'} ({$counterProductCat[$subcategory.id_category]})  </a></h5>
-
+                  </div>
+              {/foreach}
+              <div onclick="prev()" class="control-prev-btn">
+                  &#8249;
               </div>
-
-
-          {/foreach}
-          <div onclick="prev()" class="control-prev-btn">
-              &#8249;
+              <div onclick="next()" class="control-next-btn">
+                  &#8250;
+              </div>
           </div>
-          <div onclick="next()" class="control-next-btn">
-              &#8250;
-          </div>
-          </div>
-              {*              <a href="#" class="previous round">&#8249;</a>*}
-              {*              <a href="#" class="next round">&#8250;</a>*}
+          <div class="overlay"></div>
+      {/if}
+      {block name='javascript_bottom'}
+          <script>
+              function prev() {
+                  document.getElementById('slider-container').scrollLeft -= 270;
+              }
 
-              <div class="overlay"></div>
-
-
-
-{/if}
-              {*      /******slidere*}
-
-              {block name='javascript_bottom'}
-
-                  <script>
-                      function prev(){
-                          document.getElementById('slider-container').scrollLeft -= 270;
-                      }
-
-                      function next()
-                      {
-                          document.getElementById('slider-container').scrollLeft += 270;
-                      }
+              function next() {
+                  document.getElementById('slider-container').scrollLeft += 270;
+              }
 
 
-                      $(".slide img").on("click" , function(){
-                          $(this).toggleClass('zoomed');
-                          $(".overlay").toggleClass('active');
-                      })
-
-                  </script>
-              {/block}
-
-
-
+              $(".slide img").on("click", function () {
+                  $(this).toggleClass('zoomed');
+                  $(".overlay").toggleClass('active');
+              })
+          </script>
+      {/block}
               {block name='product_list_header'}
       <h1 id="js-product-list-header" class="h2">{$listing.label}</h1>
     {/block}
